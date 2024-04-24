@@ -16,7 +16,7 @@ class AppTheme {
   static ColorScheme get _colorSheme {
     return ColorScheme(
         brightness: Brightness.light,
-        primary: Colors.teal.shade100,
+        primary: Colors.red,
         onPrimary: Colors.teal.shade50,
         secondary: Colors.red.shade400,
         onSecondary: Colors.amber,

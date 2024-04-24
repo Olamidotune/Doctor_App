@@ -1,5 +1,7 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, unused_element
 
+import 'package:doctor_booking_app/presentation/widgets/avatar.dart';
+import 'package:doctor_booking_app/presentation/widgets/section_tile.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -46,7 +48,9 @@ class HomeView extends StatelessWidget {
                   Icons.location_on,
                   color: colorScheme.secondary,
                 ),
-                SizedBox(width: 10,),
+                SizedBox(
+                  width: 10,
+                ),
                 Text(
                   //come back and add the dynamic location
                   "Lagos, NG",
@@ -54,7 +58,10 @@ class HomeView extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () {},
-                  icon: Icon(Icons.expand_more,size: 20,),
+                  icon: Icon(
+                    Icons.expand_more,
+                    size: 20,
+                  ),
                 ),
               ],
             ),
@@ -81,6 +88,31 @@ class HomeView extends StatelessWidget {
             ),
           ),
         ),
+      ),
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: _DoctorCategories(),
+      ),
+    );
+  }
+}
+
+class _DoctorCategories extends StatelessWidget {
+  const _DoctorCategories({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Column(
+        children: [
+          SectionTile(
+            text: "Categories",
+            action: "See more",
+            onPressed: () {},
+          ),
+          CustomCircleAvatar(label: "label", icon: Icons.abc)
+        ],
       ),
     );
   }

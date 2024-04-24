@@ -11,7 +11,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  models:
+    path: package/models
 
   cupertino_icons: ^1.0.2
   flutter_launcher_icons: ^0.13.1
