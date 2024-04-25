@@ -9,21 +9,26 @@ class SectionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          text,
-        ),
-        if (action != null)
-          TextButton(
-            onPressed: onPressed,
-            child: Text(
-              action!,
-              style: const TextTheme().bodyLarge,
-            ),
-          )
-      ],
+    final textTheme = Theme.of(context).textTheme;
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            text,
+            style: textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.bold),
+          ),
+          if (action != null)
+            TextButton(
+              onPressed: onPressed,
+              child: Text(
+                action!,
+                style: const TextTheme().bodyLarge,
+              ),
+            )
+        ],
+      ),
     );
   }
 }

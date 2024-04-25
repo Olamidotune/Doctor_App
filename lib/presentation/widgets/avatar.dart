@@ -14,28 +14,31 @@ class CustomCircleAvatar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
-    return Column(
-      children: [
-        GestureDetector(
-          child: Column(
-            children: [
-              CircleAvatar(
-                foregroundColor: colorScheme.primary,
-                backgroundColor: colorScheme.onPrimary,
-                child: Icon(icon),
-              ),
-              Text(
-                label,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                      color: colorScheme.secondary,
-                    ),
-              ),
-            ],
-          ),
-        )
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+      child: Column(
+        children: [
+          GestureDetector(
+            child: Column(
+              children: [
+                CircleAvatar(
+                  foregroundColor: colorScheme.primary,
+                  backgroundColor: colorScheme.onPrimary,
+                  child: Icon(icon),
+                ),
+                Text(
+                  label,
+                  maxLines: 1,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                        color: Colors.black
+                      ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }

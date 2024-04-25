@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_constructors, unused_element
 
+import 'package:doctor_booking_app/presentation/widgets/appointment_card.dart';
 import 'package:doctor_booking_app/presentation/widgets/avatar.dart';
 import 'package:doctor_booking_app/presentation/widgets/section_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:models/models.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -91,8 +93,49 @@ class HomeView extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         physics: BouncingScrollPhysics(),
-        child: _DoctorCategories(),
+        child: Column(
+          children: const [
+            _DoctorCategories(),
+            _MySchedule(),
+            _NearbyDoctors(),
+          ],
+        ),
       ),
+    );
+  }
+}
+
+class _NearbyDoctors extends StatelessWidget {
+  const _NearbyDoctors({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SectionTile(
+          text: "Nearby Doctors",
+          action: "See more",
+          onPressed: () {},
+        ),
+      ],
+    );
+  }
+}
+
+class _MySchedule extends StatelessWidget {
+  const _MySchedule({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        SectionTile(
+          text: "My Schedule",
+          action: "See more",
+          onPressed: () {},
+        ),
+        const AppointmentCard(),
+      ],
     );
   }
 }
@@ -102,18 +145,26 @@ class _DoctorCategories extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Column(
-        children: [
-          SectionTile(
-            text: "Categories",
-            action: "See more",
-            onPressed: () {},
-          ),
-          CustomCircleAvatar(label: "label", icon: Icons.abc)
-        ],
-      ),
+    return Column(
+      children: [
+        SectionTile(
+          text: "Categories",
+          action: "See more",
+          onPressed: () {},
+        ),
+        Row(
+            children: DoctorCategory.values
+                .take(5)
+                .map(
+                  (category) => Expanded(
+                    child: CustomCircleAvatar(
+                      label: category.name,
+                      icon: category.icon,
+                    ),
+                  ),
+                )
+                .toList())
+      ],
     );
   }
 }
