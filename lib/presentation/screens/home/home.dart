@@ -2,6 +2,7 @@
 
 import 'package:doctor_booking_app/presentation/widgets/appointment_card.dart';
 import 'package:doctor_booking_app/presentation/widgets/avatar.dart';
+import 'package:doctor_booking_app/presentation/widgets/doctor_tile.dart';
 import 'package:doctor_booking_app/presentation/widgets/section_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:models/models.dart';
@@ -110,6 +111,7 @@ class _NearbyDoctors extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ColorScheme colorScheme = Theme.of(context).colorScheme;
     return Column(
       children: [
         SectionTile(
@@ -117,6 +119,23 @@ class _NearbyDoctors extends StatelessWidget {
           action: "See more",
           onPressed: () {},
         ),
+        SizedBox(
+          height: 10,
+        ),
+        ListView.separated(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            separatorBuilder: (context, index) {
+              return Divider(
+                height: 20,
+                color: colorScheme.secondary.withOpacity(0.15),
+              );
+            },
+            itemBuilder: (context, index) {
+              final doctor = Doctor.sampleDoctors[index];
+              return DoctorListTile(doctor: doctor);
+            },
+            itemCount: Doctor.sampleDoctors.length)
       ],
     );
   }

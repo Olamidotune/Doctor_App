@@ -24,7 +24,7 @@ class AppTheme {
         onError: Colors.redAccent,
         background: Colors.white,
         onBackground: Colors.black,
-        surface: Colors.tealAccent,
+        surface: Colors.blue.shade200,
         onSurface: Colors.black);
   }
 
