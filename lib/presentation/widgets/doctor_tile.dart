@@ -56,9 +56,12 @@ class DoctorListTile extends StatelessWidget {
           ),
         ],
       ),
-      trailing: ElevatedButton(onPressed:() {
-        
-      }, child: Text("Book now")),
+      trailing: ElevatedButton(
+        onPressed: () {},
+        child: const Text(
+          "Book now",
+        ),
+      ),
     );
   }
 }

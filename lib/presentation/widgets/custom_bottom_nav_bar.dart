@@ -14,10 +14,10 @@ class CustomBottomNavBar extends StatelessWidget {
       onTap: (value) {
         switch (value){
           case 0: 
-          print("$value 0");
+          debugPrint("$value 0");
           break;
           case 1:
-          print("$value 1" );
+          debugPrint("$value 1" );
           break;
         }
       },

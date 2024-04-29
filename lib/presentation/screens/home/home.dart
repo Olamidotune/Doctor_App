@@ -17,6 +17,9 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
+
+final ScrollController _scrollController = ScrollController();
+
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
@@ -93,14 +96,21 @@ class HomeView extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        physics: BouncingScrollPhysics(),
-        child: Column(
-          children: const [
-            _DoctorCategories(),
-            _MySchedule(),
-            _NearbyDoctors(),
-          ],
+      body: RawScrollbar(
+         thumbVisibility: true,
+        controller: _scrollController,
+        radius: Radius.circular(10),
+        thumbColor: colorScheme.secondary.withOpacity(0.6),
+        child: SingleChildScrollView(
+          controller: _scrollController,
+          physics: BouncingScrollPhysics(),
+          child: Column(
+            children: const [
+              _DoctorCategories(),
+              _MySchedule(),
+              _NearbyDoctors(),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: CustomBottomNavBar(),
