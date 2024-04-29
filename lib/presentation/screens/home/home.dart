@@ -2,6 +2,7 @@
 
 import 'package:doctor_booking_app/presentation/widgets/appointment_card.dart';
 import 'package:doctor_booking_app/presentation/widgets/avatar.dart';
+import 'package:doctor_booking_app/presentation/widgets/custom_bottom_nav_bar.dart';
 import 'package:doctor_booking_app/presentation/widgets/doctor_tile.dart';
 import 'package:doctor_booking_app/presentation/widgets/section_tile.dart';
 import 'package:flutter/material.dart';
@@ -102,6 +103,7 @@ class HomeView extends StatelessWidget {
           ],
         ),
       ),
+      bottomNavigationBar: CustomBottomNavBar(),
     );
   }
 }
