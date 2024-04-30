@@ -5,25 +5,25 @@ enum HomeStatus { initial, loading, loaded, error }
 
 class HomeState extends Equatable {
   final HomeStatus status;
-  final List<DoctorCategory> doctorCategory;
+  final List<DoctorCategory> doctorCategories;
   final List<Doctor> nearbyDoctors;
   final List myAppointments;
   const HomeState({
     this.status = HomeStatus.initial,
-    this.doctorCategory = const <DoctorCategory>[],
+    this.doctorCategories = const <DoctorCategory>[],
     this.nearbyDoctors = const <Doctor>[],
     this.myAppointments = const [],
   });
 
   HomeState copyWith({
     HomeStatus? status,
-    List<DoctorCategory>? doctorCategory,
+    List<DoctorCategory>? doctorCategories,
     List<Doctor>? nearbyDoctors,
     List? myAppointments,
   }) {
     return HomeState(
       status: status ?? this.status,
-      doctorCategory: doctorCategory ?? this.doctorCategory,
+      doctorCategories: doctorCategories ?? this.doctorCategories,
       nearbyDoctors: nearbyDoctors ?? this.nearbyDoctors,
       myAppointments: myAppointments ?? this.myAppointments,
     );
@@ -32,7 +32,7 @@ class HomeState extends Equatable {
   @override
   List<Object> get props => [
         status,
-        doctorCategory,
+        doctorCategories,
         nearbyDoctors,
         myAppointments,
       ];
