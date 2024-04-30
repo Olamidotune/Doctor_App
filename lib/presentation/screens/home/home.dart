@@ -8,7 +8,6 @@ import 'package:doctor_booking_app/presentation/widgets/doctor_tile.dart';
 import 'package:doctor_booking_app/presentation/widgets/section_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:models/models.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -131,12 +130,70 @@ class HomeView extends StatelessWidget {
   }
 }
 
+class _DoctorCategories extends StatelessWidget {
+  const _DoctorCategories({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<HomeBloc, HomeState>(
+      builder: (context, state) {
+        return Column(
+          children: [
+            SectionTile(
+              text: "Categories",
+              action: "See more",
+              onPressed: () {},
+            ),
+            Row(
+                //children:DoctorCategory.values...
+                children: state.doctorCategories
+                    .take(5)
+                    .map(
+                      (category) => Expanded(
+                        child: CustomCircleAvatar(
+                          label: category.name,
+                          icon: category.icon,
+                        ),
+                      ),
+                    )
+                    .toList())
+          ],
+        );
+      },
+    );
+  }
+}
+
+class _MySchedule extends StatelessWidget {
+  const _MySchedule({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<HomeBloc, HomeState>(
+      builder: (context, state) {
+        return Column(
+          children: [
+            SectionTile(
+              text: "My Schedule",
+              action: "See more",
+              onPressed: () {},
+            ),
+            AppointmentCard(
+              myAppointments: state.myAppointments.firstOrNull,
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
 class _NearbyDoctors extends StatelessWidget {
   const _NearbyDoctors({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
+    final colorScheme = Theme.of(context).colorScheme;
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
         return Column(
@@ -159,64 +216,12 @@ class _NearbyDoctors extends StatelessWidget {
                 );
               },
               itemBuilder: (context, index) {
-                final doctor = Doctor.sampleDoctors[index];
+                final doctor = state.nearbyDoctors[index];
                 return DoctorListTile(doctor: doctor);
               },
               // itemCount: Doctor.sampleDoctors.length)
               itemCount: state.nearbyDoctors.length,
             ),
-          ],
-        );
-      },
-    );
-  }
-}
-
-class _MySchedule extends StatelessWidget {
-  const _MySchedule({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SectionTile(
-          text: "My Schedule",
-          action: "See more",
-          onPressed: () {},
-        ),
-        const AppointmentCard(),
-      ],
-    );
-  }
-}
-
-class _DoctorCategories extends StatelessWidget {
-  const _DoctorCategories({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return BlocBuilder<HomeBloc, HomeState>(
-      builder: (context, state) {
-        return Column(
-          children: [
-            SectionTile(
-              text: "Categories",
-              action: "See more",
-              onPressed: () {},
-            ),
-            Row(
-              //children:DoctorCategory.values...
-                children: state.doctorCategories
-                    .take(5)
-                    .map(
-                      (category) => Expanded(
-                        child: CustomCircleAvatar(
-                          label: category.name,
-                          icon: category.icon,
-                        ),
-                      ),
-                    )
-                    .toList())
           ],
         );
       },

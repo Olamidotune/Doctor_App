@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 
 class AppointmentCard extends StatelessWidget {
-  const AppointmentCard({super.key});
+  final dynamic myAppointments;
+  const AppointmentCard({
+    super.key,
+    this.myAppointments,
+  });
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
     final textTheme = Theme.of(context).textTheme;
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal:15.0),
+      padding: const EdgeInsets.symmetric(horizontal: 15.0),
       child: Column(
         children: [
           Container(
@@ -50,7 +54,7 @@ class AppointmentCard extends StatelessWidget {
               ),
             ),
           ),
-            Container(
+          Container(
             height: 8,
             margin: const EdgeInsets.symmetric(horizontal: 40),
             decoration: BoxDecoration(
