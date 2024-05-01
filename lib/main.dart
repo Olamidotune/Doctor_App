@@ -1,5 +1,6 @@
 import 'package:doctor_booking_app/blocs/bloc/home_bloc.dart';
 import 'package:doctor_booking_app/config/theme.dart';
+import 'package:doctor_booking_app/presentation/screens/doctor_details/doctor_details.dart';
 import 'package:doctor_booking_app/presentation/screens/home/home.dart';
 import 'package:doctor_booking_app/repo/doctors_repository.dart';
 import 'package:flutter/material.dart';
@@ -38,9 +39,15 @@ class AppScreen extends StatelessWidget {
           ),
         ],
         child: MaterialApp(
-            title: 'Flutter Demo',
-            theme: const AppTheme().themeData,
-            home: const HomeScreen()),
+          title: 'Flutter Demo',
+          theme: const AppTheme().themeData,
+          home: const HomeScreen(),
+          routes: {
+            HomeScreen.routeName: (context) => const HomeScreen(),
+            DoctorDetailsScreen.routeName: (context) =>
+                const DoctorDetailsScreen()
+          },
+        ),
       ),
     );
   }

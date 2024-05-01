@@ -1,3 +1,4 @@
+import 'package:doctor_booking_app/presentation/screens/doctor_details/doctor_details.dart';
 import 'package:flutter/material.dart';
 import 'package:models/models.dart';
 
@@ -57,7 +58,9 @@ class DoctorListTile extends StatelessWidget {
         ],
       ),
       trailing: ElevatedButton(
-        onPressed: () {},
+        onPressed: () => Navigator.of(context).pushNamed(
+          DoctorDetailsScreen.routeName,
+        ),
         child: const Text(
           "Book now",
         ),
