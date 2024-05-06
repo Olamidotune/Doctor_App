@@ -60,6 +60,7 @@ class DoctorListTile extends StatelessWidget {
       trailing: ElevatedButton(
         onPressed: () => Navigator.of(context).pushNamed(
           DoctorDetailsScreen.routeName,
+
         ),
         child: const Text(
           "Book now",

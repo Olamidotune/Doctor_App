@@ -1,5 +1,7 @@
 import 'package:doctor_booking_app/presentation/widgets/custom_app_bar-button.dart';
+import 'package:doctor_booking_app/presentation/widgets/doctor_card.dart';
 import 'package:flutter/material.dart';
+import 'package:models/models.dart';
 
 class DoctorDetailsScreen extends StatefulWidget {
   static const String routeName = "doctor_details_screen";
@@ -43,6 +45,7 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
           ),
         ],
       ),
+      body: DoctorCard(doctor: Doctor.sampleDoctors[0],),
     );
   }
 }
