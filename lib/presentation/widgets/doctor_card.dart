@@ -7,11 +7,11 @@ class DoctorCard extends StatefulWidget {
   final bool showMoreInformation;
 
   const DoctorCard({
-    Key? key, // Added 'Key?'
+    Key? key, 
     required this.doctor,
     this.showAbout = true,
     this.showMoreInformation = true,
-  }) : super(key: key); // Added 'super(key: key)'
+  }) : super(key: key);
 
   @override
   State<DoctorCard> createState() => _DoctorCardState();
@@ -45,7 +45,7 @@ class _DoctorCardState extends State<DoctorCard> {
         "icon": Icons.numbers,
         "label": "Reviews",
         "value": widget.doctor.reviewCount
-      } // Changed "Reveiws" to "Reviews"
+      }
     ];
 
     return Card(
@@ -70,7 +70,7 @@ class _DoctorCardState extends State<DoctorCard> {
                       style: textTheme.labelLarge!.copyWith(
                         fontWeight: FontWeight.bold,
                         fontSize: 20
-                      ), // Changed textTheme.labelLarge to textTheme.headline6
+                      ), 
                     ),
                     Text(widget.doctor.category.name),
                     Row(
@@ -154,7 +154,7 @@ class _DoctorCardState extends State<DoctorCard> {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
-                          SizedBox(height: 4),
+                          const SizedBox(height: 4),
                           Text(e["label"] as String),
                         ],
                       ),

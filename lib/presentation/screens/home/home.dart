@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, unused_element
 
 import 'package:doctor_booking_app/blocs/bloc/home_bloc.dart';
+import 'package:doctor_booking_app/presentation/screens/doctor_details/doctor_details.dart';
 import 'package:doctor_booking_app/presentation/widgets/appointment_card.dart';
 import 'package:doctor_booking_app/presentation/widgets/avatar.dart';
 import 'package:doctor_booking_app/presentation/widgets/custom_bottom_nav_bar.dart';
@@ -190,7 +191,7 @@ class _MySchedule extends StatelessWidget {
 }
 
 class _NearbyDoctors extends StatelessWidget {
-  const _NearbyDoctors({super.key});
+  const _NearbyDoctors({Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -218,9 +219,20 @@ class _NearbyDoctors extends StatelessWidget {
               },
               itemBuilder: (context, index) {
                 final doctor = state.nearbyDoctors[index];
-                return DoctorListTile(doctor: doctor);
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DoctorDetailsScreen(
+                          doctorId: doctor.id,
+                        ),
+                      ),
+                    );
+                  },
+                  child: DoctorListTile(doctor: doctor),
+                );
               },
-              // itemCount: Doctor.sampleDoctors.length)
               itemCount: state.nearbyDoctors.length,
             ),
           ],

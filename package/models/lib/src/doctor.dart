@@ -103,7 +103,7 @@ class Doctor extends Equatable {
     ),
     // Add more doctor data entries here...
     Doctor(
-      id: '20',
+      id: '5',
       name: 'Dr. Michael Williams',
       bio: 'Orthopedic Surgeon',
       profileImageUrl: 'https://shorturl.at/hwyFL',
@@ -116,7 +116,7 @@ class Doctor extends Equatable {
       patientCount: 850,
     ),
     Doctor(
-      id: '3',
+      id: '6',
       name: 'Dr. John Smith',
       bio: 'Cardiologist',
       profileImageUrl: 'https://example.com/profile_images/dr_john_smith.jpg',
@@ -129,7 +129,7 @@ class Doctor extends Equatable {
       patientCount: 1500,
     ),
     Doctor(
-      id: '4',
+      id: '7',
       name: 'Dr. Emily Johnson',
       bio: 'Pediatrician',
       profileImageUrl:
@@ -143,7 +143,7 @@ class Doctor extends Equatable {
       patientCount: 800,
     ),
     Doctor(
-      id: '5',
+      id: '8',
       name: 'Dr. Michael Brown',
       bio: 'Ophthalmologist',
       profileImageUrl:
@@ -157,7 +157,7 @@ class Doctor extends Equatable {
       patientCount: 2000,
     ),
     Doctor(
-      id: '6',
+      id: '9',
       name: 'Dr. Sarah Lee',
       bio: 'Neurologist',
       profileImageUrl: 'https://example.com/profile_images/dr_sarah_lee.jpg',
@@ -170,7 +170,7 @@ class Doctor extends Equatable {
       patientCount: 1200,
     ),
     Doctor(
-      id: '7',
+      id: '10',
       name: 'Dr. David Martinez',
       bio: 'Orthopedic Surgeon',
       profileImageUrl:

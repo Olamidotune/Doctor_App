@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:doctor_booking_app/presentation/widgets/custom_app_bar-button.dart';
 import 'package:doctor_booking_app/presentation/widgets/doctor_card.dart';
 import 'package:flutter/material.dart';
@@ -7,13 +9,23 @@ class DoctorDetailsScreen extends StatefulWidget {
   static const String routeName = "doctor_details_screen";
 
   final String? doctorId;
-  const DoctorDetailsScreen({super.key, this.doctorId});
+  const DoctorDetailsScreen({Key? key, this.doctorId});
 
   @override
   State<DoctorDetailsScreen> createState() => _DoctorDetailsScreenState();
 }
 
 class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
+  late Doctor doctor;
+
+  @override
+  void initState() {
+    super.initState();
+    // Fetch the doctor data using the doctorId
+    doctor =
+        Doctor.sampleDoctors.firstWhere((doc) => doc.id == widget.doctorId);
+  }
+
   bool hasFav = false;
 
   @override
@@ -51,7 +63,7 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
         child: Column(
           children: [
             DoctorCard(
-              doctor: Doctor.sampleDoctors[0],
+              doctor: doctor,
             ),
             Divider(
               height: 32,
@@ -66,9 +78,7 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
 }
 
 class _DoctorWorkingHours extends StatelessWidget {
-  const _DoctorWorkingHours({
-    super.key,
-  });
+  const _DoctorWorkingHours();
 
   @override
   Widget build(BuildContext context) {
@@ -137,7 +147,7 @@ class _DoctorWorkingHours extends StatelessWidget {
                 );
               },
             ),
-            Text("data")
+            // Text("data")
           ],
         ),
       ),
