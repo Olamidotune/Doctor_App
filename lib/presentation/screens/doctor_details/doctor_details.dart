@@ -19,6 +19,7 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
       appBar: AppBar(
         leading: CustomAppBarButton(
@@ -36,7 +37,7 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
         ),
         actions: [
           CustomAppBarButton(
-            icon: hasFav ? Icons.favorite: Icons.favorite_outline,
+            icon: hasFav ? Icons.favorite : Icons.favorite_outline,
             onPressed: () {
               setState(() {
                 hasFav = !hasFav;
@@ -45,7 +46,100 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
           ),
         ],
       ),
-      body: DoctorCard(doctor: Doctor.sampleDoctors[0],),
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Column(
+          children: [
+            DoctorCard(
+              doctor: Doctor.sampleDoctors[0],
+            ),
+            Divider(
+              height: 32,
+              color: colorScheme.surfaceVariant,
+            ),
+            const _DoctorWorkingHours()
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _DoctorWorkingHours extends StatelessWidget {
+  const _DoctorWorkingHours({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    final colorTheme = Theme.of(context).colorScheme;
+    return SizedBox(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 15.0),
+        child: Column(
+          children: [
+            Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                "Working Hours",
+                style: textTheme.labelLarge!
+                    .copyWith(fontWeight: FontWeight.bold, fontSize: 15),
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            ListView.separated(
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              separatorBuilder: (context, index) {
+                return const SizedBox(
+                  height: 15,
+                );
+              },
+              itemCount: Doctor.sampleDoctors[0].workingHours.length,
+              itemBuilder: (context, index) {
+                return Row(
+                  children: [
+                    Expanded(
+                      child: Text(
+                        Doctor.sampleDoctors[0].workingHours[index].dayOfWeek,
+                        style: textTheme.labelLarge!.copyWith(
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 20,
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      decoration: BoxDecoration(
+                          color: colorTheme.primary.withOpacity(0.3),
+                          border: Border.all(),
+                          borderRadius: BorderRadius.circular(3)),
+                      child: Text(
+                        "${Doctor.sampleDoctors[0].workingHours[index].startTime.hour}am",
+                      ),
+                    ),
+                    const Text("  -  "),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                      decoration: BoxDecoration(
+                          color: colorTheme.primary.withOpacity(0.3),
+                          border: Border.all(),
+                          borderRadius: BorderRadius.circular(3)),
+                      child: Text(
+                          "${Doctor.sampleDoctors[0].workingHours[index].endTime.hour}pm"),
+                    )
+                  ],
+                );
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
