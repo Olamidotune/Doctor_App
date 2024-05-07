@@ -102,7 +102,7 @@ class HomeView extends StatelessWidget {
         if (state.status == HomeStatus.loading ||
             state.status == HomeStatus.initial) {
           return const Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator.adaptive(),
           );
         }
         if (state.status == HomeStatus.loaded) {
