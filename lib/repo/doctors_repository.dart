@@ -23,7 +23,10 @@ class DoctorRepository {
     throw UnimplementedError();
   }
 
-  Future<List<Doctor>> fetchDoctorById(String doctorId) async {
-    throw UnimplementedError();
+  Future<Doctor?> fetchDoctorById(String doctorId) async {
+    await Future.delayed(const Duration(seconds: 1));
+    return Doctor.sampleDoctors.firstWhere(
+      (doc) => doc.id == doctorId,
+    );
   }
 }

@@ -1,4 +1,5 @@
-import 'package:doctor_booking_app/blocs/bloc/home_bloc.dart';
+
+import 'package:doctor_booking_app/blocs/home/home_bloc.dart';
 import 'package:doctor_booking_app/config/theme.dart';
 import 'package:doctor_booking_app/presentation/screens/doctor_details/doctor_details.dart';
 import 'package:doctor_booking_app/presentation/screens/home/home.dart';
@@ -45,7 +46,7 @@ class AppScreen extends StatelessWidget {
           routes: {
             HomeScreen.routeName: (context) => const HomeScreen(),
             DoctorDetailsScreen.routeName: (context) =>
-                const DoctorDetailsScreen()
+                const DoctorDetailsScreen(doctorId: '',)
           },
         ),
       ),

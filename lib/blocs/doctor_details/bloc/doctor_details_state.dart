@@ -1,0 +1,31 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+part of 'doctor_details_bloc.dart';
+
+enum DoctorDetailsStatus { initial, loading, loaded, error }
+
+class DoctorDetailsState extends Equatable {
+  final DoctorDetailsStatus status;
+  final Doctor? doctor;
+  const DoctorDetailsState({
+    this.status = DoctorDetailsStatus.initial,
+    this.doctor,
+  });
+
+
+  DoctorDetailsState copyWith({
+    DoctorDetailsStatus? status,
+    Doctor? doctor,
+  }) {
+    return DoctorDetailsState(
+      status: status ?? this.status,
+      doctor: doctor ?? this.doctor,
+    );
+  }
+
+
+
+  @override
+  List<Object?> get props => [status, doctor];
+}
+
+final class DoctorDetailsInitial extends DoctorDetailsState {}

@@ -1,76 +1,78 @@
 // ignore_for_file: use_key_in_widget_constructors
 
-import 'package:doctor_booking_app/presentation/widgets/custom_app_bar-button.dart';
+import 'package:doctor_booking_app/blocs/doctor_details/bloc/doctor_details_bloc.dart';
+import 'package:doctor_booking_app/presentation/widgets/custom_app_bar_button.dart';
 import 'package:doctor_booking_app/presentation/widgets/doctor_card.dart';
+import 'package:doctor_booking_app/repo/doctors_repository.dart';
+import 'package:doctor_booking_app/utils/time_of_day_extension.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:models/models.dart';
 
-class DoctorDetailsScreen extends StatefulWidget {
+class DoctorDetailsScreen extends StatelessWidget {
   static const String routeName = "doctor_details_screen";
-
-  final String? doctorId;
-  const DoctorDetailsScreen({Key? key, this.doctorId});
-
-  @override
-  State<DoctorDetailsScreen> createState() => _DoctorDetailsScreenState();
-}
-
-class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
-  late Doctor doctor;
-
-  @override
-  void initState() {
-    super.initState();
-    // Fetch the doctor data using the doctorId
-    doctor =
-        Doctor.sampleDoctors.firstWhere((doc) => doc.id == widget.doctorId);
-  }
-
-  bool hasFav = false;
+  final String doctorId;
+  const DoctorDetailsScreen({Key? key, required this.doctorId});
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final colorScheme = Theme.of(context).colorScheme;
-    return Scaffold(
-      appBar: AppBar(
-        leading: CustomAppBarButton(
-          icon: Icons.arrow_back_ios,
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        title: Text(
-          "Doctor's Details",
-          style: textTheme.titleMedium!.copyWith(
-            fontWeight: FontWeight.w600,
-            fontSize: 20,
-          ),
-        ),
-        actions: [
-          CustomAppBarButton(
-            icon: hasFav ? Icons.favorite : Icons.favorite_outline,
+    return BlocProvider(
+      create: (context) =>
+          DoctorDetailsBloc(doctorRepository: context.read<DoctorRepository>())
+            ..add(LoadDoctorDetailsEvent(doctorId: doctorId)),
+      child: Scaffold(
+        appBar: AppBar(
+          leading: CustomAppBarButton(
+            icon: Icons.arrow_back_ios,
             onPressed: () {
-              setState(() {
-                hasFav = !hasFav;
-              });
+              Navigator.of(context).pop();
             },
           ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            DoctorCard(
-              doctor: doctor,
+          title: Text(
+            "Doctor's Details",
+            style: textTheme.titleMedium!.copyWith(
+              fontWeight: FontWeight.w600,
+              fontSize: 20,
             ),
-            Divider(
-              height: 32,
-              color: colorScheme.surfaceVariant,
-            ),
-            const _DoctorWorkingHours()
+          ),
+          actions:const [
+             Icon(Icons.favorite_border_outlined),
           ],
+        ),
+        body: BlocBuilder<DoctorDetailsBloc, DoctorDetailsState>(
+          builder: (context, state) {
+            if (state.status == DoctorDetailsStatus.initial ||
+                state.status == DoctorDetailsStatus.loading) {
+              return const Center(child:  CircularProgressIndicator.adaptive());
+            }
+            if (state.status == DoctorDetailsStatus.loaded) {
+              final doctor = state.doctor;
+
+              if (doctor == null) {
+                return const Center(
+                  child: Text("Doctor not found..."),
+                );
+              }
+
+              return SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                child: Column(
+                  children: [
+                    DoctorCard(doctor: state.doctor!),
+                    Divider(
+                      height: 32,
+                      color: colorScheme.surfaceVariant,
+                    ),
+                    _DoctorWorkingHours(doctor.workingHours)
+                  ],
+                ),
+              );
+            } else {
+              return const Text("Something went wrong");
+            }
+          },
         ),
       ),
     );
@@ -78,7 +80,10 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
 }
 
 class _DoctorWorkingHours extends StatelessWidget {
-  const _DoctorWorkingHours();
+  final List<DoctorWorkingHours> workingHours;
+  const _DoctorWorkingHours(
+    this.workingHours,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -114,7 +119,7 @@ class _DoctorWorkingHours extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        Doctor.sampleDoctors[0].workingHours[index].dayOfWeek,
+                        workingHours[index].dayOfWeek,
                         style: textTheme.labelLarge!.copyWith(
                           fontWeight: FontWeight.w500,
                         ),
@@ -130,7 +135,10 @@ class _DoctorWorkingHours extends StatelessWidget {
                           border: Border.all(),
                           borderRadius: BorderRadius.circular(3)),
                       child: Text(
-                        "${Doctor.sampleDoctors[0].workingHours[index].startTime.hour}am",
+                        workingHours[index]
+                            .startTime
+                            .toCustomString()
+                   
                       ),
                     ),
                     const Text("  -  "),
@@ -141,7 +149,8 @@ class _DoctorWorkingHours extends StatelessWidget {
                           border: Border.all(),
                           borderRadius: BorderRadius.circular(3)),
                       child: Text(
-                          "${Doctor.sampleDoctors[0].workingHours[index].endTime.hour}pm"),
+                        workingHours[index].endTime.toCustomString(),
+                      ),
                     )
                   ],
                 );

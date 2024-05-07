@@ -1,6 +1,6 @@
 // ignore_for_file: prefer_const_constructors, unused_element
 
-import 'package:doctor_booking_app/blocs/bloc/home_bloc.dart';
+import 'package:doctor_booking_app/blocs/home/home_bloc.dart';
 import 'package:doctor_booking_app/presentation/screens/doctor_details/doctor_details.dart';
 import 'package:doctor_booking_app/presentation/widgets/appointment_card.dart';
 import 'package:doctor_booking_app/presentation/widgets/avatar.dart';
